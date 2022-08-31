@@ -1,0 +1,36 @@
+.appmain {
+border: 2px solid green;
+    margin: 4px;
+}
+
+.desc {
+    color: rgb(89, 86, 86);
+}
+
+.delete {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#errorInput {
+    color: red;
+}
+
+#show {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.hiddenTask {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+}
