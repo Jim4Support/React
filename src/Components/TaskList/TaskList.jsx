@@ -10,13 +10,13 @@ export default function TaskList({ tasks, setTasks }) {
         var value = e.target.value;
         [...tasks].map(item => {
             if (item.id === value) {
-                item.done = !item.done;
-                setChecked(!checked);
+                return item.done = !item.done;
+                
             } else {
-                item.done = !item.done;
-                setChecked(!checked);
+                return item.done = !item.done;
             }
         });
+        setChecked(!checked);
     }
 
     function deleteTask(id) {
