@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Main.css';
+import './TaskList.css';
 
-export default function Main({tasks, setTasks}) {
+export default function TaskList({tasks, setTasks}) {
     const [update, setUpdate] = useState(null);
     const [value, setValue] = useState('');
 
@@ -27,7 +27,7 @@ export default function Main({tasks, setTasks}) {
     }
 
     return (
-        <main className='main'>
+        <main className='tasklist'>
             <h1>To Do List</h1>
             <hr className="hr" size="5px"/>
             <div id="show">

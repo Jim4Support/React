@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import './App.css';
-import Main from './Components/Main/Main.js';
-import Header from './Components/Header/Header.js';
-import Footer from './Components/Footer/Footer.js';
+import TaskList from './Components/TaskList/TaskList.jsx';
+import Sidebar from './Components/Sidebar/Sidebar.jsx';
+import TaskForm from './Components/TaskForm/TaskForm.jsx';
 
 function App() {
   
@@ -46,10 +46,10 @@ function App() {
 
   return (
     <div className="todoapp">
-      <Header />
+      <Sidebar />
       <div className='content'>
-        <Main tasks={tasks} setTasks={setTasks}/>
-        <Footer tasks={tasks} setTasks={setTasks}/>
+        <TaskList tasks={tasks} setTasks={setTasks}/>
+        <TaskForm tasks={tasks} setTasks={setTasks}/>
       </div>
     </div>
   );

@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import './Footer.css'
+import './TaskForm.css'
 
-export default function Footer({tasks, setTasks}) {
+export default function TaskForm({tasks, setTasks}) {
  
   const [newTask, setNewTask] = useState('');
   const [newDesc, setNewDesc] = useState('');
 
-  // const handleInputChange = (event) => { //example
+  // const handleInputChange = (event) => {
   //   const target = event.target;
   //   const value = target.type === 'checkbox' ? target.checked : target.value;
   //   const name = target.name;
 
-  //   this.setState({
-  //     [name]: value
+  //   this.setNewTask({
+  //     [name]: value,
   //   });
   // }
 
@@ -33,7 +33,7 @@ export default function Footer({tasks, setTasks}) {
   // }
  
   const nameAndDesc = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     addTask()
     // addDesc()
   }
@@ -54,7 +54,7 @@ export default function Footer({tasks, setTasks}) {
 
 
     return (
-        <footer className='footer'>
+        <footer className='taskform'>
             <form onSubmit={nameAndDesc}>
                 <input name="dueDate" type="date"/>
                 <input name="name" type="text" placeholder="Add a new task" value={newTask} onChange={(t) => setNewTask(t.target.value)}/>
