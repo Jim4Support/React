@@ -1,67 +1,55 @@
 import React, {useState} from 'react';
 import './TaskForm.css'
 
+  const inc = (init = 10) => () => ++init
+  const genId = inc();
+
 export default function TaskForm({tasks, setTasks}) {
  
   const [newTask, setNewTask] = useState('');
   const [newDesc, setNewDesc] = useState('');
-
-  // const handleInputChange = (event) => {
-  //   const target = event.target;
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   const name = target.name;
-
-  //   this.setNewTask({
-  //     [name]: value,
-  //   });
-  // }
-
-  function addTask() {
+  const [newDate, setNewDate] = useState('');
+ 
+  const handleInputChange = (event) => {
+    event.preventDefault()
+    if (newTask.trim() === null || newTask.trim() === '') {
+      alert('Please, enter a task');
+    } else {
     setTasks([...tasks, {
-      name: newTask
+      id: genId(),
+      dueDate: onPushDate(newDate) ? onPushDate(newDate) : null,
+      done: false,
+      name: newTask.trim(),
+      description: newDesc.trim() || null
     }
   ]);
+}
   setNewTask('');
+  setNewDesc('');
   }
 
-  // function addDesc() {
-  //   setTasks([...tasks, {
-  //     description: newDesc
-  //   }
-  // ]);
-  // setNewDesc('');
-  // }
- 
-  const nameAndDesc = (event) => {
-    event.preventDefault()
-    addTask()
-    // addDesc()
-  }
-//   tasksForm.addEventListener('submit', (event) => {
-//     event.preventDefault();
-//     if (inputTask[0].value.trim() === null || inputTask[0].value.trim() === '') {
-//         errorInput.innerText = 'Please, enter a task';
-//     } else {
-//         errorInput.innerText = '';
-//         const formData = new FormData(tasksForm);
-//         const formTask = Object.fromEntries(formData.entries());
-//         data.push(new Task(data.id, onPushDate(inputDate[0].value), false, inputTask[0].value, inputDesc[0].value.trim()));
-//         addTask(formTask).then(generateTasks)
-//             .then(_ => tasksForm.reset())
-//         renderTask();
-//     }
-// });
+  function onPushDate(dueDate) {
+    if (dueDate) {
+        const day = new Date(dueDate).getDate();
+        const month = new Date(dueDate).getMonth();
+        const year = new Date(dueDate).getFullYear();
+        return new Date(year, month, day);
+    } else return null;
+}
 
-
+console.log(tasks);
     return (
         <footer className='taskform'>
-            <form onSubmit={nameAndDesc}>
-                <input name="dueDate" type="date"/>
-                <input name="name" type="text" placeholder="Add a new task" value={newTask} onChange={(t) => setNewTask(t.target.value)}/>
-                {/* <span id="errorInput"></span> */}
-                <input name="description" type="text" placeholder="Add a description" value={newDesc} onChange={(t) => setNewDesc(t.target.value)}/>
-                <input type="submit" value="Add"/>
+            <form onSubmit={handleInputChange}>
+                <input name="dueDate" type="date" value={newDate}
+                onChange={(e) => setNewDate(e.target.value)}/>
+                <input name="name" type="text" placeholder="Add a new task" value={newTask} 
+                onChange={(e) => setNewTask(e.target.value)}/>
+                <input name="description" type="text" placeholder="Add a description" value={newDesc} 
+                onChange={(e) => setNewDesc(e.target.value)}/>
+                <input type="submit" value="Add"/>  
             </form>
+           
         </footer>
     )
 }

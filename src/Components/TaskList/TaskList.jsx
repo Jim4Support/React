@@ -16,14 +16,25 @@ export default function TaskList({tasks, setTasks}) {
     }
 
     function saveChanges(id) {
-        let newChanges = [...tasks].map(t => {
-            if (t.id === id) {
-                t.name = value;
+        let newChanges = [...tasks].map(title => {
+            if (title.id === id) {
+                title.name = value.trim();
             }
-            return t;
+            return title;
         })
         setTasks(newChanges);
         setUpdate(null);
+    }
+
+    function correctDate(dueDate) {
+        if (dueDate) {
+            const noZeroDay = new Date(dueDate).getDate();
+            const day = noZeroDay.toString().length === 1 ? (0 + noZeroDay.toString()) : noZeroDay;
+            const noZeroMonth = new Date(dueDate).getMonth() + 1;
+            const month = noZeroMonth.toString().length === 1 ? (0 + noZeroMonth.toString()) : noZeroMonth;
+            const year = new Date(dueDate).getFullYear();
+            return `${day}.${month}.${year}`;
+        } else return '~no date~';
     }
 
     return (
@@ -38,13 +49,13 @@ export default function TaskList({tasks, setTasks}) {
                     tasks.map(item => (
                         <div key={item.id}>
                             {
-                                update === item.id ? <div><input onChange={(t) => setValue(t.target.value)} value={value}/></div> : ''
+                                update === item.id ? <div><input onChange={(e) => setValue(e.target.value)} value={value}/></div> : ''
                             }
 
                             {
                                 update === item.id ? <div><button onClick={() => saveChanges(item.id)}>Save changes</button></div> : <div>
                                 <div>
-                                {item.dueDate} <br/>
+                                {correctDate(item.dueDate)} <br/>
                         <label>
                             <input type={'checkbox'}/>
                             {item.name} {item.done}

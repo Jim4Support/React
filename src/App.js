@@ -9,21 +9,21 @@ function App() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      dueDate: '2022-09-02',
+      dueDate: new Date('2022-09-02'),
       done: false,
       name: 'hometask',
       description: null
     },
     {
       id: 2,
-      dueDate: '2022-09-02',
+      dueDate: new Date('2022-09-02'),
       done: false,
       name: 'officetask',
       description: 'make office work'
     },
     {
       id: 3,
-      dueDate: '2022-08-21',
+      dueDate: new Date('2022-08-21'),
       done: true,
       name: 'shopping',
       description: 'buy vegetables'
@@ -37,7 +37,7 @@ function App() {
     },
     {
       id: 5,
-      dueDate: '2022-08-26',
+      dueDate: new Date('2022-08-26'),
       done: false,
       name: 'CSS Figma',
       description: 'to do adaptive mobile first'
