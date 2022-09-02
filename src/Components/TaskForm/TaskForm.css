@@ -2,11 +2,3 @@
     border: 2px solid black;
     margin: 4px;
 }
-
-.errorInput {
-    display: none;
-}
-
-.secondClass {
-    display: unset;
-}

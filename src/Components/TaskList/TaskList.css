@@ -3,32 +3,35 @@ border: 2px solid green;
     margin: 4px;
 }
 
+hr {
+    height: 3px;
+    background-color: gray;
+}
+
+.background-gray {
+    background-color: gray;
+    height: 3px;
+}
+
+.background-red {
+    background-color:red;
+}
+
+.background-green {
+    background-color: green;
+}
+
+.name {
+    font-weight: bold;
+}
+
 .desc {
     color: rgb(89, 86, 86);
 }
 
 .delete {
     display: flex;
-    justify-content: flex-end;
-}
-
-#form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-#errorInput {
-    color: red;
-}
-
-#show {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.hiddenTask {
-    display: none;
+    justify-content: space-between;
 }
 
 h1 {

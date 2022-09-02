@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import './TaskForm.css'
 
-  const inc = (init = 10) => () => ++init
-  const genId = inc();
+const inc = (init = 10) => () => ++init
+const genId = inc();
 
 export default function TaskForm({tasks, setTasks}) {
  
@@ -17,7 +17,7 @@ export default function TaskForm({tasks, setTasks}) {
     } else {
     setTasks([...tasks, {
       id: genId(),
-      dueDate: onPushDate(newDate) ? onPushDate(newDate) : null,
+      dueDate: onPushDate(newDate) || null,
       done: false,
       name: newTask.trim(),
       description: newDesc.trim() || null
@@ -26,6 +26,7 @@ export default function TaskForm({tasks, setTasks}) {
 }
   setNewTask('');
   setNewDesc('');
+  setNewDate('');
   }
 
   function onPushDate(dueDate) {
@@ -43,7 +44,7 @@ console.log(tasks);
             <form onSubmit={handleInputChange}>
                 <input name="dueDate" type="date" value={newDate}
                 onChange={(e) => setNewDate(e.target.value)}/>
-                <input name="name" type="text" placeholder="Add a new task" value={newTask} 
+                <input name="name" type="text" placeholder="Add a new task" value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}/>
                 <input name="description" type="text" placeholder="Add a description" value={newDesc} 
                 onChange={(e) => setNewDesc(e.target.value)}/>
