@@ -38,7 +38,6 @@ export default function TaskForm({tasks, setTasks}) {
     } else return null;
 }
 
-console.log(tasks);
     return (
         <footer className='taskform'>
             <form onSubmit={handleInputChange}>

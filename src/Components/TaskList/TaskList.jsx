@@ -7,15 +7,13 @@ export default function TaskList({ tasks, setTasks }) {
     const [checked, setChecked] = useState(false);
 
     function checkValue(e) {
-        var value = e.target.value;
-        [...tasks].map(item => {
-            if (item.id === value) {
-                return item.done = !item.done;
-                
-            } else {
-                return item.done = !item.done;
-            }
-        });
+        const value = e.target.value;
+        const task = tasks.find(t => t.id === +value);
+        if (task.done) {
+            task.done = !task.done;
+        } else {
+            task.done = !task.done;
+        }
         setChecked(!checked);
     }
 
@@ -70,6 +68,7 @@ export default function TaskList({ tasks, setTasks }) {
     function changeStatus(done) {
         return done ? 'line-through' : 'none';
     }
+console.log(tasks);
 
     return (
         <main className='tasklist'>
@@ -94,7 +93,7 @@ export default function TaskList({ tasks, setTasks }) {
                                         </div>
                                         <div class="checkDone">
                                             <label style={{ textDecoration: changeStatus(item.done) }}>
-                                                <input onChange={checkValue} type="checkbox" name="checkfield" checked={item.done} value={item.id} />
+                                                <input onChange={(e) => checkValue(e)} type="checkbox" name="checkfield" checked={item.done} value={item.id} />
                                                 {item.name}</label>
                                         </div>
                                         <div className='desc'>
