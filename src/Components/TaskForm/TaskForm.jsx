@@ -40,13 +40,14 @@ export default function TaskForm({tasks, setTasks}) {
 
     return (
         <footer className='taskform'>
+          
             <form onSubmit={handleInputChange}>
-                <input name="dueDate" type="date" value={newDate}
-                onChange={(e) => setNewDate(e.target.value)}/>
-                <input name="name" type="text" placeholder="Add a new task" value={newTask}
-                onChange={(e) => setNewTask(e.target.value)}/>
-                <input name="description" type="text" placeholder="Add a description" value={newDesc} 
-                onChange={(e) => setNewDesc(e.target.value)}/>
+                <div><input name="dueDate" type="date" value={newDate}
+                onChange={(e) => setNewDate(e.target.value)}/></div>
+                <div><input name="name" type="text" placeholder="Add a new task" value={newTask}
+                onChange={(e) => setNewTask(e.target.value)}/></div>
+                <div><input name="description" type="text" placeholder="Add a description" value={newDesc} 
+                onChange={(e) => setNewDesc(e.target.value)}/></div>
                 <input type="submit" value="Add"/>  
             </form>
            

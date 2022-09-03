@@ -5,6 +5,7 @@ export default function TaskList({ tasks, setTasks }) {
     const [update, setUpdate] = useState(null);
     const [value, setValue] = useState('');
     const [checked, setChecked] = useState(false);
+    const [show, setShow] = useState(true);
 
     function checkValue(e) {
         const value = e.target.value;
@@ -68,13 +69,19 @@ export default function TaskList({ tasks, setTasks }) {
     function changeStatus(done) {
         return done ? 'line-through' : 'none';
     }
+
+    function hideTasks(id, done) {
+        const newArray = tasks.filter(t => t.id === id && t.done !== done);
+        setTasks(newArray)
+        setShow(!show)
+    }
 console.log(tasks);
 
     return (
         <main className='tasklist'>
             <h1>To Do List</h1>
             <div id="show">
-                <button type="button" id="showTasks">Show/Hide done</button>
+                <button type="button" id="showTasks" onClick={() => hideTasks()}>Show/Hide done</button>
             </div>
             <div>
                 {
@@ -91,7 +98,7 @@ console.log(tasks);
                                         <div style={{ color: changeDateColor(item.dueDate, item.done) }}>
                                             {correctDate(item.dueDate)}
                                         </div>
-                                        <div class="checkDone">
+                                        <div className="checkDone">
                                             <label style={{ textDecoration: changeStatus(item.done) }}>
                                                 <input onChange={(e) => checkValue(e)} type="checkbox" name="checkfield" checked={item.done} value={item.id} />
                                                 {item.name}</label>
@@ -105,6 +112,8 @@ console.log(tasks);
                                         </div>
                                     </div>
                                 </div>
+                            }
+                            {
                             }
                         </div>
                     ))
