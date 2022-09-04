@@ -23,6 +23,11 @@ export default function TaskList({ tasks, setTasks }) {
         deleteTask(id).then(getTasks).then(tasks => setTasks(tasks.data))
     }
 
+    // function changeTaskStatus(id) {
+    //     const task = tasks.find(t => t.id === id)
+    //     patchTask(task).then(getTasks).then(tasks => setTasks(tasks.data))
+    // }
+
     function updateTask(id, name) {
         setUpdate(id)
         setValue(name)
@@ -54,7 +59,7 @@ export default function TaskList({ tasks, setTasks }) {
         if (dueDate !== null) {
             const now = new Date();
             now.setHours(0, 0, 0, 0);
-            return now > dueDate;
+            return now > new Date(dueDate);
         }
     }
 
@@ -76,7 +81,7 @@ export default function TaskList({ tasks, setTasks }) {
     //     setShow(!show)
     // }
 
-    const today = new Date();
+    // const today = new Date();
 
     console.log(tasks);
     return (
@@ -96,7 +101,7 @@ export default function TaskList({ tasks, setTasks }) {
                             {
                                 update === item.id ? <div><button onClick={() => saveChanges(item.id)}>Save changes</button></div> : <div>
                                     <div>
-                                        <hr className={changeBack(item.dueDate, item.done)} style={{backgroundColor: item.dueDate < today ? "red" : ''}} />
+                                        <hr className={changeBack(item.dueDate, item.done)} />
                                         <div style={{ color: changeDateColor(item.dueDate, item.done) }}>
                                             {correctDate(item.dueDate)}
                                         </div>
