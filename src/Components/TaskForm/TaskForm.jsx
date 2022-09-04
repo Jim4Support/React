@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
+import { postTask, getTasks} from '../../Connection/tasks.rest';
 import './TaskForm.css'
-
-const inc = (init = 10) => () => ++init
-const genId = inc();
 
 export default function TaskForm({tasks, setTasks}) {
  
@@ -15,14 +13,13 @@ export default function TaskForm({tasks, setTasks}) {
     if (newTask.trim() === null || newTask.trim() === '') {
       alert('Please, enter a task');
     } else {
-    setTasks([...tasks, {
-      id: genId(),
+    const task = {
       dueDate: onPushDate(newDate) || null,
       done: false,
       name: newTask.trim(),
       description: newDesc.trim() || null
     }
-  ]);
+    postTask(task).then(getTasks).then(tasks => setTasks(tasks.data))
 }
   setNewTask('');
   setNewDesc('');

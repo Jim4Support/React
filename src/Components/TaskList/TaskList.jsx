@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TaskList.css';
+import { deleteTask, getTasks } from '../../Connection/tasks.rest';
 
 export default function TaskList({ tasks, setTasks }) {
     const [update, setUpdate] = useState(null);
@@ -18,9 +19,8 @@ export default function TaskList({ tasks, setTasks }) {
         setChecked(!checked);
     }
 
-    function deleteTask(id) {
-        const newArray = tasks.filter(t => t.id !== id);
-        setTasks(newArray);
+    function delTask(id) {
+        deleteTask(id).then(getTasks).then(tasks => setTasks(tasks.data))
     }
 
     function updateTask(id, name) {
@@ -76,6 +76,9 @@ export default function TaskList({ tasks, setTasks }) {
     //     setShow(!show)
     // }
 
+    const today = new Date();
+
+    console.log(tasks);
     return (
         <main className='tasklist'>
             <h1>To Do List</h1>
@@ -85,7 +88,7 @@ export default function TaskList({ tasks, setTasks }) {
             <div>
                 {
                     tasks.map(item => (
-                        <div key={item.id}>
+                        <div key={item.id} >
                             {
                                 update === item.id ? <div><input onChange={(e) => setValue(e.target.value)} value={value} /></div> : ''
                             }
@@ -93,7 +96,7 @@ export default function TaskList({ tasks, setTasks }) {
                             {
                                 update === item.id ? <div><button onClick={() => saveChanges(item.id)}>Save changes</button></div> : <div>
                                     <div>
-                                        <hr className={changeBack(item.dueDate, item.done)} />
+                                        <hr className={changeBack(item.dueDate, item.done)} style={{backgroundColor: item.dueDate < today ? "red" : ''}} />
                                         <div style={{ color: changeDateColor(item.dueDate, item.done) }}>
                                             {correctDate(item.dueDate)}
                                         </div>
@@ -107,7 +110,7 @@ export default function TaskList({ tasks, setTasks }) {
                                         </div>
                                         <div className='delete'>
                                             <button className='update' onClick={() => updateTask(item.id, item.name)}>change</button>
-                                            <button onClick={() => deleteTask(item.id)}>delete</button>
+                                            <button onClick={() => delTask(item.id)}>delete</button>
                                         </div>
                                     </div>
                                 </div>
