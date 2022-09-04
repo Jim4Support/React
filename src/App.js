@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import './App.css';
+// import axios from 'axios';
 import TaskList from './Components/TaskList/TaskList.jsx';
 import Sidebar from './Components/Sidebar/Sidebar.jsx';
 import TaskForm from './Components/TaskForm/TaskForm.jsx';
 
 function App() {
+  //   useEffect(() => {
+//     getTasks().then(tasks => setTasks(tasks.data))
+// }, [tasks.length])
+
+// function getTasks() {
+//     return axios.get('http://localhost:3000/tasks')
+//   }
   
   const [tasks, setTasks] = useState([
     {

@@ -5,7 +5,7 @@ export default function TaskList({ tasks, setTasks }) {
     const [update, setUpdate] = useState(null);
     const [value, setValue] = useState('');
     const [checked, setChecked] = useState(false);
-    const [show, setShow] = useState(true);
+    // const [show, setShow] = useState(true);
 
     function checkValue(e) {
         const value = e.target.value;
@@ -70,19 +70,18 @@ export default function TaskList({ tasks, setTasks }) {
         return done ? 'line-through' : 'none';
     }
 
-    function hideTasks(id, done) {
-        const newArray = tasks.filter(t => t.id === id && t.done !== done);
-        setTasks(newArray)
-        setShow(!show)
-    }
-console.log(tasks);
+    // function hideTasks(id, done) {
+    //     const newArray = tasks.filter(t => t.id === id && t.done === true);
+    //     setTasks(newArray)
+    //     setShow(!show)
+    // }
 
     return (
         <main className='tasklist'>
             <h1>To Do List</h1>
-            <div id="show">
+            {/* <div id="show">
                 <button type="button" id="showTasks" onClick={() => hideTasks()}>Show/Hide done</button>
-            </div>
+            </div> */}
             <div>
                 {
                     tasks.map(item => (
