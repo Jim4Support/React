@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './TaskList.css';
 import { deleteTask, getTasks } from '../../Connection/tasks.rest';
+import TaskForm from '../TaskForm/TaskForm';
 
 export default function TaskList({ tasks, setTasks }) {
     const [update, setUpdate] = useState(null);
@@ -13,6 +14,7 @@ export default function TaskList({ tasks, setTasks }) {
         const task = tasks.find(t => t.id === +value);
         if (task.done) {
             task.done = !task.done;
+            
         } else {
             task.done = !task.done;
         }
@@ -120,12 +122,11 @@ export default function TaskList({ tasks, setTasks }) {
                                     </div>
                                 </div>
                             }
-                            {
-                            }
                         </div>
                     ))
                 }
             </div>
+            <TaskForm tasks={tasks} setTasks={setTasks}/>
         </main>
     )
 }

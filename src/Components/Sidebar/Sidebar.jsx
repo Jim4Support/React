@@ -4,7 +4,8 @@ import './Sidebar.css';
 export default function Sidebar() {
     return (
         <header className="sidebar">
-            Lists
+            <a href='/today'>Today</a> <br />
+            <a href='/todo-list/:id'>ToDo List</a>
         </header>
     )
 }
