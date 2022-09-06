@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import './App.css';
 import {Routes, Route} from "react-router-dom";
 import TaskListCollection from "./Components/TaskList/TaskListCollection";
-import Sidebar from "./Components/Sidebar/Sidebar";
+import TaskList from "./Components/TaskList/TaskList";
 
 export function AppRoute() {
 
   return (
     <Routes>
         <Route path="/today" element={<TaskListCollection />}/>
-        <Route path="/todo-list" element={<Sidebar />}/>
+        <Route path="/todo-list" element={<TaskList />}/>
     </Routes>
  );
 }

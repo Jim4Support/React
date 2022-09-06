@@ -2,37 +2,37 @@ import React from 'react';
 import './TaskList.css';
 
 export default function TaskList({ update,
-    item,
+    tasks,
     checkValue,
     delTask,
     updateTask,
     saveChanges,
     correctDate,
-    changeBack,
-    changeDateColor,
-    changeStatus}) {
-    console.log(item);
+    overdue}) {
+    console.log(tasks);
     return (
         <main className='tasklist'>
             <h1>To Do List</h1>
             {/* <div id="show">
                 <button type="button" id="showTasks" onClick={() => hideTasks()}>Show/Hide done</button>
             </div> */}
-            <div>
+            {tasks.map(item => {
+                return (
                 <div key={item.id} >
                     {/* {
                                 update === item.id ? <div><input onChange={(e) => setValue(e.target.value)} value={value} /></div> : ''
                             } */}
 
                     {
-                        update === item.id ? <div><button onClick={() => saveChanges(item.id)}>Save changes</button></div> : <div>
+                        // update === item.id ? <div><button onClick={() => saveChanges(item.id)}>Save changes</button></div> : 
+                        <div>
                             <div>
-                                <hr className={changeBack(item.dueDate, item.done)} />
-                                <div style={{ color: changeDateColor(item.dueDate, item.done) }}>
+                                <hr className={(overdue(item.dueDate) && !item.done) ? 'background-red' : item.done ? 'background-green' : 'background-grey'} />
+                                <div style={{ color: (overdue(item.dueDate) && !item.done) ? 'red' : '' }}>
                                     {correctDate(item.dueDate)}
                                 </div>
                                 <div className="checkDone">
-                                    <label style={{ textDecoration: changeStatus(item.done) }}>
+                                    <label style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                                         <input onChange={(e) => checkValue(e)} type="checkbox" name="checkfield" checked={item.done} value={item.id} />
                                         {item.name}</label>
                                 </div>
@@ -50,7 +50,9 @@ export default function TaskList({ update,
                         </div>
                     }
                 </div>
-            </div>
+                )
+                
+            })}
         </main>
     )
 }

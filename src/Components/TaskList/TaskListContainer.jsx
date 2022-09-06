@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './TaskList.css';
 import { deleteTask, getTasks, patchTask } from '../../Connection/tasksConnect';
+import TaskList from './TaskList.jsx';
 import TaskForm from '../TaskForm/TaskForm';
 
-export default function TaskList({tasks, setTasks}) {
+export default function TaskListContainer({tasks, setTasks}) {
 
     const [update, setUpdate] = useState(null);
     const [value, setValue] = useState('');
@@ -27,9 +28,13 @@ export default function TaskList({tasks, setTasks}) {
         deleteTask(id).then(getTasks).then(tasks => setTasks(tasks.data))
     }
 
-    function changeTaskStatus(id) {
+    async function changeTaskStatus(id, body) {
         const task = tasks.find(t => t.id === id)
         patchTask(task).then(getTasks).then(tasks => setTasks(tasks.data))
+    
+        // await patchTask(id, body)
+        // const update = tasks.map(task => task.id === id ? { ...tasks, ...body } : tasks);
+        // return update;
     }
 
     function updateTask(id, name) {
@@ -48,7 +53,12 @@ export default function TaskList({tasks, setTasks}) {
         setUpdate(null);
     }
 
-    function correctDate(dueDate) {
+    function overdue(dueDate) { // worked
+        const now = new Date().setHours(0, 0, 0, 0);
+        return (dueDate !== null) && now > new Date(dueDate) ? true : false;
+    }
+    
+    function correctDate(dueDate) { // worked
         if (dueDate) {
             const noZeroDay = new Date(dueDate).getDate();
             const day = noZeroDay.toString().length === 1 ? (0 + noZeroDay.toString()) : noZeroDay;
@@ -57,26 +67,6 @@ export default function TaskList({tasks, setTasks}) {
             const year = new Date(dueDate).getFullYear();
             return `${day}.${month}.${year}`;
         } else return '~no date~';
-    }
-
-    function overdue(dueDate) {
-        if (dueDate !== null) {
-            const now = new Date();
-            now.setHours(1, 0, 0, 0);
-            return now > new Date(dueDate);
-        }
-    }
-
-    function changeBack(dueDate, done) {
-        return (overdue(dueDate) && !done) ? 'background-red' : done ? 'background-green' : 'background-grey';
-    }
-
-    function changeDateColor(dueDate, done) {
-        return (overdue(dueDate) && !done) ? 'red' : '';
-    }
-
-    function changeStatus(done) {
-        return done ? 'line-through' : 'none';
     }
 
     // function hideTasks(id, done) {
@@ -91,8 +81,9 @@ export default function TaskList({tasks, setTasks}) {
 
     return (
         <div>
-            {tasks&&tasks.map((t) => (<TaskList item={t}
-                checkValue={ checkValue }
+            <TaskList 
+                tasks={tasks}
+                checkValue={checkValue}
                 update={update}
                 setUpdate={setUpdate}
                 setTasks={setTasks}
@@ -103,10 +94,10 @@ export default function TaskList({tasks, setTasks}) {
                 updateTask={updateTask}
                 saveChanges={saveChanges}
                 correctDate={correctDate}
-                changeBack={changeBack}
-                changeDateColor={changeDateColor}
-                changeStatus={changeStatus} />))}
-            <TaskForm />
+                overdue={overdue} />
+            <div>
+                <TaskForm />
+            </div>
         </div>
     )
 }

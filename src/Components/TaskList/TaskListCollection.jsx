@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import './TaskList.css';
 import axios from 'axios';
-import TaskListContainer from './TaskListContainer.js'
+import TaskListContainer from './TaskListContainer.jsx'
 
 export default function TaskListCollection() {
     const [collection, setCollection] = useState([]);
