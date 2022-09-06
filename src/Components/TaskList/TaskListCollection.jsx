@@ -1,13 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import './TaskList.css';
 import axios from 'axios';
-import TaskListContainer from './TaskListContainer.jsx'
+import TaskItem from './TaskItem';
 
 export default function TaskListCollection() {
     const [collection, setCollection] = useState([]);
 
     async function getCollection() {
-        const some = await axios.get("http://localhost:4000/api/collection/today")
+        const some = await axios.get("http://localhost:4000/collections/today")
         setCollection(some.data);
     }
 
@@ -16,6 +16,6 @@ export default function TaskListCollection() {
     }, [])
 
     return (
-        <TaskListContainer tasks={collection} setTasks={setCollection}/>
+        <TaskItem tasks={collection} setTasks={setCollection}/>
     )
 }

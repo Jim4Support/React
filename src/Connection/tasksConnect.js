@@ -12,6 +12,6 @@ export function postTask(task) {
     return axios.post("http://localhost:4000/tasks" , task)
 }
 
-export function patchTask(task) {
-    return axios.patch("http://localhost:4000/tasks/" + task.id, task)
+export function patchTask(id, task) {
+    return axios.patch("http://localhost:4000/tasks/" + id, task)
 }

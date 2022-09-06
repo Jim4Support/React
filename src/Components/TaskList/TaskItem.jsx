@@ -1,9 +1,24 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { patchTask, deleteTask, getTasks } from '../../Connection/tasksConnect';
 import './TaskList.css';
 
-export default function TaskItem(tasks) {
+export default function TaskItem() {
+    const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        getTasks().then(res => setTasks(res.data))
+    }, [tasks.length])
+
     function onDelete(id) {
-        deleteTask(id).then(getTasks).then(tasks => setTasks(tasks.data))
+        deleteTask(id).then(res => setTasks(tasks.filter(t => t.id !== res.id)))
+    }
+    console.log(tasks);
+
+    function onUpdate(id, task) {
+        patchTask(id, task).then(res => setTasks(tasks.map(t => t.id === id ? res.data : t)))
+        console.log(task);
     }
 
     function overdue(dueDate) { // worked
@@ -36,7 +51,7 @@ export default function TaskItem(tasks) {
                                     </div>
                                     <div className="checkDone">
                                         <label style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-                                            <input onChange={(e) => checkValue(e)} type="checkbox" name="checkfield" checked={item.done} value={item.id} />
+                                            <input onChange={() => onUpdate(item.id, item)} type="checkbox" name="checkfield" checked={item.done} value={item.id} />
                                             {item.name}</label>
                                     </div>
                                     <div className='desc'>
@@ -46,8 +61,8 @@ export default function TaskItem(tasks) {
                                         listId: {item.listId}
                                     </div>
                                     <div className='delete'>
-                                        <button className='update' onClick={() => updateTask(item.id, item.name)}>change</button>
-                                        <button onClick={() => delTask(item.id)}>delete</button>
+                                        {/* <button className='update' onClick={() => updateTask(item.id, item.name)}>change</button> */}
+                                        <button onClick={() => onDelete(item.id)}>delete</button>
                                     </div>
                                 </div>
                             </div>
