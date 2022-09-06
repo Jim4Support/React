@@ -5,7 +5,7 @@ export default function Sidebar() {
     return (
         <header className="sidebar">
             <a href='/today'>Today</a> <br />
-            <a href='/todo-list/:id'>ToDo List</a>
+            <a href='/todo-list'>ToDo List</a>
         </header>
     )
 }

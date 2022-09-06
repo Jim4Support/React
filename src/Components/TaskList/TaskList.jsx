@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './TaskList.css';
-import { deleteTask, getTasks } from '../../Connection/tasks.rest';
+import { deleteTask, getTasks } from '../../Connection/tasksConnect';
 import TaskForm from '../TaskForm/TaskForm';
 
 export default function TaskList({ tasks, setTasks }) {

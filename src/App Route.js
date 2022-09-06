@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
 import {Routes, Route} from "react-router-dom";
-import { getTasks } from "./Connection/tasks.rest.js";
+import { getTasks } from "./Connection/tasksConnect.js";
 import TaskList from './Components/TaskList/TaskList.jsx';
+import List from "./Components/Lists/List";
 
 export function AppRoute() {
 
@@ -15,6 +16,7 @@ export function AppRoute() {
   return (
     <Routes>
         <Route path="/today" element={<TaskList tasks={tasks} setTasks={setTasks}/>}/>
+        <Route path="/todo-list" element={<List />}/>
     </Routes>
  );
 }

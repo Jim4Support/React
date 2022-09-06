@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { postTask, getTasks} from '../../Connection/tasks.rest';
+import { postTask, getTasks} from '../../Connection/tasksConnect';
 import './TaskForm.css'
 
 export default function TaskForm({tasks, setTasks}) {
