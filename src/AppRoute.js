@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
 import {Routes, Route} from "react-router-dom";
-import { getTasks } from "./Connection/tasksConnect.js";
-import TaskList from './Components/TaskList/TaskList.jsx';
-import List from "./Components/Lists/List";
+import TaskListCollection from "./Components/TaskList/TaskListCollection";
+import Sidebar from "./Components/Sidebar/Sidebar";
 
 export function AppRoute() {
 
-  const [tasks, setTasks] = useState([]);
-  
-  useEffect(() => {
-        getTasks().then(tasks => setTasks(tasks.data))
-    }, [tasks.length])
-
   return (
     <Routes>
-        <Route path="/today" element={<TaskList tasks={tasks} setTasks={setTasks}/>}/>
-        <Route path="/todo-list" element={<List />}/>
+        <Route path="/today" element={<TaskListCollection />}/>
+        <Route path="/todo-list" element={<Sidebar />}/>
     </Routes>
  );
 }

@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './App.css';
-import { getTasks } from "./Connection/tasksConnect.js";
 import Sidebar from './Components/Sidebar/Sidebar.jsx';
-import { AppRoute } from "./App Route";
+import { AppRoute } from "./AppRoute";
 
 function App() {
 
-  const [tasks, setTasks] = useState([]);
-  
-  useEffect(() => {
-        getTasks().then(tasks => setTasks(tasks.data))
-    }, [tasks.length])
-
   return (
     <div className="todoapp">
-      <Sidebar tasks={tasks} setTasks={setTasks}/>
+      <Sidebar />
       <div className='content'>
         <AppRoute />
       </div>
