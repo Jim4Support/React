@@ -4,6 +4,7 @@ import Sidebar from './Components/Sidebar/Sidebar.jsx'
 import { Route, Routes } from "react-router-dom";
 import ToDoLists from "./Components/TaskList/ToDoLists";
 import List from "./Components/Lists/List";
+import TaskForm from './Components/TaskForm/TaskForm'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/today" element={<ToDoLists />} />
           <Route path="/todo-list/:id" element={<List/>}/>
         </Routes>
+      <TaskForm />
       </div>
     </div>
   );
