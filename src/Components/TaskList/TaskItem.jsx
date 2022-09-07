@@ -12,13 +12,13 @@ export default function TaskItem({tasks, setTasks}) {
         patchTask(id, body).then(setTasks(tasks.map(task => task.id === id ? {...tasks, ...body} : task)))
     }
 
-    function overdue(dueDate) { // worked
+    function overdue(dueDate) {
         const now = new Date();
         now.setHours(0, 0, 0, 0);
         return (dueDate !== null) && now > new Date(dueDate) ? true : false;
     }
     
-    function correctDate(dueDate) { // worked
+    function correctDate(dueDate) {
         if (dueDate) {
             const noZeroDay = new Date(dueDate).getDate();
             const day = noZeroDay.toString().length === 1 ? (0 + noZeroDay.toString()) : noZeroDay;
