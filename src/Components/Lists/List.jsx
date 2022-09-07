@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react"
 import TaskItem from "../TaskList/TaskItem";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function List() {
     const [listOfTasks, setListOfTasks] = useState([]);
-
-    let { id } = useParams();
+    const location = useLocation();
+    const { id } = useParams();
 
     async function getListOfTasks() {
         const listElement = await axios.get(`http://localhost:4000/lists/${id}/tasks?all=true`)
@@ -15,7 +15,7 @@ export default function List() {
 
     useEffect(() => {
       getListOfTasks();
-  }, [])
+  }, [location.pathname])
 
     return (
         <TaskItem tasks={listOfTasks} setTasks={setListOfTasks}/>

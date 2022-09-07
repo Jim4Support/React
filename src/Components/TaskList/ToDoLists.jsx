@@ -6,8 +6,8 @@ export default function ToDoLists() {
     const [collection, setCollection] = useState([]);
 
     async function getCollection() {
-        const some = await axios.get("http://localhost:4000/api/collection/today")
-        setCollection(some.data);
+        const todayTasks = await axios.get("http://localhost:4000/api/collection/today")
+        setCollection(todayTasks.data);
     }
 
     useEffect(() => {
