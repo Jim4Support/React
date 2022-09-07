@@ -50,7 +50,7 @@ export default function TaskItem({tasks, setTasks}) {
                                     <div className='desc'>
                                         {item.description ? item.description : '~no description~'}
                                     </div>
-                                    <div>
+                                    <div className="listInfo">
                                         List: {item.listId}
                                     </div>
                                     <div className='delete'>

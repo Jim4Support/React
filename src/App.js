@@ -2,8 +2,8 @@ import React from "react";
 import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar.jsx'
 import { Route, Routes } from "react-router-dom";
-import TaskListCollection from "./Components/TaskList/ToDoLists";
-import TaskList from "./Components/TaskList/TaskList";
+import ToDoLists from "./Components/TaskList/ToDoLists";
+import List from "./Components/Lists/List";
 
 function App() {
 
@@ -12,8 +12,8 @@ function App() {
       <Sidebar />
       <div className='content'>
         <Routes>
-          <Route path="/today" element={<TaskListCollection />} />
-          <Route path="/todo-list/:id"/>
+          <Route path="/today" element={<ToDoLists />} />
+          <Route path="/todo-list/:id" element={<List/>}/>
         </Routes>
       </div>
     </div>
