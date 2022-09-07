@@ -1,28 +1,20 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { patchTask, deleteTask, getTasks } from '../../Connection/tasksConnect';
-import './TaskList.css';
+import { patchTask, deleteTask } from '../../Connection/tasksConnect';
+import './TaskItem.css';
 
-export default function TaskItem() {
-    const [tasks, setTasks] = useState([]);
-
-    useEffect(() => {
-        getTasks().then(res => setTasks(res.data))
-    }, [tasks.length])
+export default function TaskItem({tasks, setTasks}) {
 
     function onDelete(id) {
-        deleteTask(id).then(res => setTasks(tasks.filter(t => t.id !== res.id)))
+        deleteTask(id).then(setTasks(tasks.filter(t => t.id !== id)))
     }
-    console.log(tasks);
 
-    function onUpdate(id, task) {
-        patchTask(id, task).then(res => setTasks(tasks.map(t => t.id === id ? res.data : t)))
-        console.log(task);
+    function onUpdate(id, body) {
+        patchTask(id, body).then(setTasks(tasks.map(task => task.id === id ? {...tasks, ...body} : task)))
     }
 
     function overdue(dueDate) { // worked
-        const now = new Date().setHours(0, 0, 0, 0);
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
         return (dueDate !== null) && now > new Date(dueDate) ? true : false;
     }
     
@@ -36,6 +28,7 @@ export default function TaskItem() {
             return `${day}.${month}.${year}`;
         } else return '~no date~';
     }
+    console.log(tasks);
 
     return (
         <main className='tasklist'>
@@ -51,14 +44,14 @@ export default function TaskItem() {
                                     </div>
                                     <div className="checkDone">
                                         <label style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-                                            <input onChange={() => onUpdate(item.id, item)} type="checkbox" name="checkfield" checked={item.done} value={item.id} />
+                                            <input onChange={() => onUpdate(item.id, item)} type="checkbox" name="checkfield" checked={item.done} onClick={()=>item.done = !item.done}/>
                                             {item.name}</label>
                                     </div>
                                     <div className='desc'>
                                         {item.description ? item.description : '~no description~'}
                                     </div>
                                     <div>
-                                        listId: {item.listId}
+                                        List: {item.listId}
                                     </div>
                                     <div className='delete'>
                                         {/* <button className='update' onClick={() => updateTask(item.id, item.name)}>change</button> */}

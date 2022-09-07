@@ -2,7 +2,7 @@ import React from "react";
 import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar.jsx'
 import { Route, Routes } from "react-router-dom";
-import TaskListCollection from "./Components/TaskList/TaskListCollection";
+import TaskListCollection from "./Components/TaskList/ToDoLists";
 import TaskList from "./Components/TaskList/TaskList";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <div className='content'>
         <Routes>
           <Route path="/today" element={<TaskListCollection />} />
-          <Route path="/todo-list/:id" element={<TaskList />} />
+          <Route path="/todo-list/:id"/>
         </Routes>
       </div>
     </div>
