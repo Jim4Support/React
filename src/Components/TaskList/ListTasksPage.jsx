@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react"
 import TaskItem from "./TaskItem";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import TaskForm from "../TaskForm/TaskForm";
 import { patchTask, deleteTask } from '../../Connection/tasksConnect';
+import { getListTasks } from "../../Connection/listsConnect";
 
-function getListTasks(id) {
-    return axios.get(`http://localhost:4000/lists/${id}/tasks?all=true`)
-        .then(res => res.data);
-}
 
 export default function ListTasksPage() {
     let [tasks, setTasks] = useState([]);
