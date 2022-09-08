@@ -3,22 +3,25 @@ import axios from 'axios';
 import TaskItem from './TaskItem';
 import TaskForm from '../TaskForm/TaskForm';
 
-export default function TasksOnToday() {
-    const [collection, setCollection] = useState([]);
-
-    async function getCollection() {
-        const todayTasks = await axios.get("http://localhost:4000/api/collection/today")
-        setCollection(todayTasks.data);
+function getCollection() {
+        return axios.get("http://localhost:4000/api/collection/today")
+            .then(res => res.data)
     }
 
+export default function TasksOnToday() {
+    let [tasks, setTasks] = useState([]);
+
     useEffect(() => {
-        getCollection();
+        getCollection().then(setTasks);
     }, [])
 
     return (
         <>
-        <TaskItem tasks={collection} setTasks={setCollection}/>
-        <TaskForm />
+            <main className='tasklist'>
+                <h1>To Do List</h1>
+                {tasks.map(item => (<TaskItem key={item.id} item={item}/>))}
+            </main>
+            <TaskForm />
         </>
     )
 }
