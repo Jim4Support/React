@@ -2,9 +2,8 @@ import React from "react";
 import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar.jsx'
 import { Route, Routes } from "react-router-dom";
-import ToDoLists from "./Components/TaskList/ToDoLists";
-import List from "./Components/Lists/List";
-import TaskForm from './Components/TaskForm/TaskForm'
+import TasksOnToday from "./Components/TaskList/TasksOnToday";
+import TaskList from "./Components/TaskList/TaskList";
 
 function App() {
 
@@ -13,10 +12,9 @@ function App() {
       <Sidebar />
       <div className='content'>
         <Routes>
-          <Route path="/today" element={<ToDoLists />} />
-          <Route path="/todo-list/:id" element={<List />}/>
+          <Route path="/today" element={<TasksOnToday />} />
+          <Route path="/todo-list/:id" element={<TaskList />}/>
         </Routes>
-      <TaskForm />
       </div>
     </div>
   );

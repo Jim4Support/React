@@ -34,7 +34,8 @@ export default function TaskItem({ tasks, setTasks }) {
         } else return '~no date~';
     }
 
-    console.log(tasks);
+    // const listName = tasks.map(task => task.list)
+    // console.log(listName);
 
     return (
         <main className='tasklist'>

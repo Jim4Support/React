@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { postTask, getTasks} from '../../Connection/tasksConnect';
+import { postTask } from '../../Connection/tasksConnect';
 import './TaskForm.css'
 
 export default function TaskForm({tasks, setTasks}) {
@@ -13,18 +13,16 @@ export default function TaskForm({tasks, setTasks}) {
     event.preventDefault()
     if (newTask.trim() === null || newTask.trim() === '') {
       alert('Please, enter a task');
-    } else if (newList.value === null) {
-      alert('Please, choose one of the options')
-  } else {
+    } else {
     const task = {
       dueDate: onPushDate(newDate) || null,
       done: false,
       name: newTask.trim(),
       description: newDesc.trim() || null,
-      listId: newList
+      listId: newList ? newList : alert('Please, choose one of the options')
     }
-    postTask(task).then(getTasks).then(tasks => setTasks(tasks.data))
-}
+    postTask(task).then(tasks => setTasks(tasks.data))
+  }
   setNewTask('');
   setNewDesc('');
   setNewDate('');
@@ -39,8 +37,8 @@ export default function TaskForm({tasks, setTasks}) {
         return new Date(year, month, day);
     } else return null;
 }
-// console.log(tasks);
-// tasks.map(task => task.list)
+// tasks.map(task => task)
+//console.log(tasks);
 
     return (
         <footer className='taskform'>
@@ -54,7 +52,7 @@ export default function TaskForm({tasks, setTasks}) {
                 onChange={(e) => setNewDesc(e.target.value)}/></div>
                 <div>
                   <select onChange={(e) => setNewList(e.target.value)}>
-                  <option></option>
+                    <option value={null}>Choose list</option>
                     <option value={1}>list1</option>
                     <option value={2}>list2</option>
                     <option value={3}>list3</option>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import TaskItem from './TaskItem';
+import TaskForm from '../TaskForm/TaskForm';
 
-export default function ToDoLists() {
+export default function TasksOnToday() {
     const [collection, setCollection] = useState([]);
 
     async function getCollection() {
@@ -15,6 +16,9 @@ export default function ToDoLists() {
     }, [])
 
     return (
+        <>
         <TaskItem tasks={collection} setTasks={setCollection}/>
+        <TaskForm />
+        </>
     )
 }

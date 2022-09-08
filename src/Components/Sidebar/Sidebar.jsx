@@ -32,7 +32,8 @@ export default function Sidebar() {
                     )
                 })
             }
-            <NavLink to="/today">Todo Lists</NavLink>
+            <br />
+            <NavLink to="/today">Tasks on today</NavLink>
         </header>
     )
 }
