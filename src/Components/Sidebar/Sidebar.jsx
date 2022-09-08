@@ -4,7 +4,9 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
+
     const [lists, setLists] = useState([]);
+    
 
     async function getLists() {
         const listElement = await axios.get("http://localhost:4000/api/lists")
@@ -25,7 +27,7 @@ export default function Sidebar() {
                                 <NavLink to={`/todo-list/${list.id}`}>
                                     {list.name}
                                 </NavLink>
-                            </div>
+                            </div>    
                         </div>
                     )
                 })

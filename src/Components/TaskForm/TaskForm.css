@@ -1,5 +1,6 @@
 .taskform {
     border: 2px solid black;
+    padding: 3px;
     margin: 4px;
     display: grid;
     flex-wrap: wrap;

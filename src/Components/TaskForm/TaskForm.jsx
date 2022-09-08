@@ -3,27 +3,32 @@ import { postTask, getTasks} from '../../Connection/tasksConnect';
 import './TaskForm.css'
 
 export default function TaskForm({tasks, setTasks}) {
- 
+
   const [newTask, setNewTask] = useState('');
   const [newDesc, setNewDesc] = useState('');
   const [newDate, setNewDate] = useState('');
+  const [newList, setNewList] = useState('');
  
   const handleInputChange = (event) => {
     event.preventDefault()
     if (newTask.trim() === null || newTask.trim() === '') {
       alert('Please, enter a task');
-    } else {
+    } else if (newList.value === null) {
+      alert('Please, choose one of the options')
+  } else {
     const task = {
       dueDate: onPushDate(newDate) || null,
       done: false,
       name: newTask.trim(),
-      description: newDesc.trim() || null
+      description: newDesc.trim() || null,
+      listId: newList
     }
     postTask(task).then(getTasks).then(tasks => setTasks(tasks.data))
 }
   setNewTask('');
   setNewDesc('');
   setNewDate('');
+  setNewList('');
   }
 
   function onPushDate(dueDate) {
@@ -34,6 +39,8 @@ export default function TaskForm({tasks, setTasks}) {
         return new Date(year, month, day);
     } else return null;
 }
+// console.log(tasks);
+// tasks.map(task => task.list)
 
     return (
         <footer className='taskform'>
@@ -45,6 +52,14 @@ export default function TaskForm({tasks, setTasks}) {
                 onChange={(e) => setNewTask(e.target.value)}/></div>
                 <div><input name="description" type="text" placeholder="Add a description" value={newDesc} 
                 onChange={(e) => setNewDesc(e.target.value)}/></div>
+                <div>
+                  <select onChange={(e) => setNewList(e.target.value)}>
+                  <option></option>
+                    <option value={1}>list1</option>
+                    <option value={2}>list2</option>
+                    <option value={3}>list3</option>
+                  </select>
+                </div>
                 <input type="submit" value="Add"/>  
             </form>
            

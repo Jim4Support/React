@@ -14,7 +14,7 @@ function App() {
       <div className='content'>
         <Routes>
           <Route path="/today" element={<ToDoLists />} />
-          <Route path="/todo-list/:id" element={<List/>}/>
+          <Route path="/todo-list/:id" element={<List />}/>
         </Routes>
       <TaskForm />
       </div>

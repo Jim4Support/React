@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import TaskItem from "../TaskList/TaskItem";
 import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
@@ -14,8 +14,8 @@ export default function List() {
     }
 
     useEffect(() => {
-      getListOfTasks();
-  }, [location.pathname])
+        getListOfTasks();
+    }, [location.pathname])
 
     return (
         <TaskItem tasks={listOfTasks} setTasks={setListOfTasks}/>
