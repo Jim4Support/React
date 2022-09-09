@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { getCollection } from '../../Connection/listsConnect';
 import TaskItem from './TaskItem';
-import TaskForm from '../TaskForm/TaskForm';
 import { patchTask, deleteTask } from '../../Connection/tasksConnect';
 
 export default function TasksOnToday() {
@@ -16,7 +15,7 @@ export default function TasksOnToday() {
     }
 
     function onUpdate(id, body) {
-        patchTask(id, body).then(setTasks(tasks.map(task => task.id === id ? { ...tasks, ...body } : task)))
+        patchTask(id, body).then(setTasks(tasks.filter(t => t.id !== id)))
     }
 
     const taskItemProps = { onDelete, onUpdate }

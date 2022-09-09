@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 function overdue(dueDate) {
     const now = new Date();
-    now.setHours(0, 0, 0, 0);
     return (dueDate !== null) && now > new Date(dueDate) ? true : false;
 }
 
