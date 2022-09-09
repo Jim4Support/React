@@ -1,5 +1,6 @@
 import React from 'react';
 import './TaskItem.css';
+import { NavLink } from 'react-router-dom';
 
 function overdue(dueDate) {
     const now = new Date();
@@ -34,7 +35,12 @@ export default function TaskItem({ item, onDelete, onUpdate }) {
                 {item.description ? item.description : '~no description~'}
             </div>
             <div className="listInfo">
-                List: {item.listId}
+                {
+                    item.list ?
+                        <NavLink to={`/todo-list/${item.listId}`}>
+                            {item.list.name}
+                        </NavLink> : ''
+                }
             </div>
             <div className='delete'>
                 {/* <button className='update' onClick={() => updateTask(item.id, item.name)}>change</button> */}

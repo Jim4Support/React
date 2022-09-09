@@ -29,7 +29,7 @@ export default function ListTasksPage() {
     }
 
     const taskItemProps = { onDelete, onUpdate }
-
+    
     return (
         <>
             <main className='tasklist'>
@@ -39,7 +39,7 @@ export default function ListTasksPage() {
                 </div>
                 {tasks.map(item => (<TaskItem key={item.id} item={item} {...taskItemProps} />))}
             </main>
-            <TaskForm tasks={tasks} setTasks={setTasks}/>
+            <TaskForm tasks={tasks} setTasks={setTasks} />
         </>
     )
 }

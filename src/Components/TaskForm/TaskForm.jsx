@@ -11,7 +11,7 @@ function onPushDate(dueDate) {
   } else return null;
 }
 
-export default function TaskForm({tasks, setTasks}) {
+export default function TaskForm({tasks, setTasks, listId}) {
 
   const [newTask, setNewTask] = useState('');
   const [newDesc, setNewDesc] = useState('');
@@ -32,7 +32,7 @@ export default function TaskForm({tasks, setTasks}) {
       description: newDesc.trim() || null,
       listId: newList
     }
-    postTask(task).then(setTasks(tasks.map(t => t.length ? {...tasks, ...task} : task)))
+    postTask(task).then(setTasks(tasks.map({...tasks, ...task})))
     console.log(tasks);
   }
   setNewTask('');
@@ -40,11 +40,10 @@ export default function TaskForm({tasks, setTasks}) {
   setNewDate('');
   setNewList('');
   }
-
   
 // tasks.map(task => task)
 //console.log(tasks);
-
+ 
     return (
         <footer className='taskform'>
           
@@ -58,9 +57,9 @@ export default function TaskForm({tasks, setTasks}) {
                 <div>
                   <select onChange={(e) => setNewList(e.target.value)}>
                     <option value={null}>Choose list</option>
-                    <option value={1}>list1</option>
-                    <option value={2}>list2</option>
-                    <option value={3}>list3</option>
+                    <option value={listId}>list1</option>
+                    <option value={listId}>list2</option>
+                    <option value={listId}>list3</option>
                   </select>
                 </div>
                 <input type="submit" value="Add"/>

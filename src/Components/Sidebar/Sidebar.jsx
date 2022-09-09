@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
 import './Sidebar.css';
-import axios from "axios";
+import { getLists } from "../../Connection/listsConnect";
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
 
     const [lists, setLists] = useState([]);
     
-
-    async function getLists() {
-        const listElement = await axios.get("http://localhost:4000/api/lists")
-        setLists(listElement.data)
-    }
-
     useEffect(() => {
-        getLists()
+        getLists().then(setLists)
     }, [])
 
     return (
