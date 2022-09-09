@@ -16,33 +16,25 @@ export default function TaskForm({tasks, setTasks, listId}) {
   const [newTask, setNewTask] = useState('');
   const [newDesc, setNewDesc] = useState('');
   const [newDate, setNewDate] = useState('');
-  const [newList, setNewList] = useState('');
  
   const handleInputChange = (event) => {
     event.preventDefault()
     if (newTask.trim() === null || newTask.trim() === '') {
       alert('Please, enter a task');
-    } if (!newList) {
-      alert('Please, choose one of the options')
     } else {
     const task = {
       dueDate: onPushDate(newDate) || null,
       done: false,
       name: newTask.trim(),
       description: newDesc.trim() || null,
-      listId: newList
+      listId: listId
     }
-    postTask(task).then(setTasks(tasks.map({...tasks, ...task})))
-    console.log(tasks);
+    postTask(task).then((res) => setTasks([...tasks, ...res.data]))
   }
   setNewTask('');
   setNewDesc('');
   setNewDate('');
-  setNewList('');
   }
-  
-// tasks.map(task => task)
-//console.log(tasks);
  
     return (
         <footer className='taskform'>
@@ -54,14 +46,6 @@ export default function TaskForm({tasks, setTasks, listId}) {
                 onChange={(e) => setNewTask(e.target.value)}/></div>
                 <div><input name="description" type="text" placeholder="Add a description" value={newDesc}
                 onChange={(e) => setNewDesc(e.target.value)}/></div>
-                <div>
-                  <select onChange={(e) => setNewList(e.target.value)}>
-                    <option value={null}>Choose list</option>
-                    <option value={listId}>list1</option>
-                    <option value={listId}>list2</option>
-                    <option value={listId}>list3</option>
-                  </select>
-                </div>
                 <input type="submit" value="Add"/>
             </form>
            

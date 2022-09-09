@@ -27,7 +27,6 @@ export default function TasksOnToday() {
                 <h1>To Do List</h1>
                 {tasks.map(item => (<TaskItem key={item.id} item={item} {...taskItemProps}/>))}
             </main>
-            <TaskForm />
         </>
     )
 }
