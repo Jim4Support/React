@@ -2,6 +2,15 @@ import React, {useState} from 'react';
 import { postTask } from '../../Connection/tasksConnect';
 import './TaskForm.css'
 
+function onPushDate(dueDate) {
+  if (dueDate) {
+      const day = new Date(dueDate).getDate();
+      const month = new Date(dueDate).getMonth();
+      const year = new Date(dueDate).getFullYear();
+      return new Date(year, month, day);
+  } else return null;
+}
+
 export default function TaskForm({tasks, setTasks}) {
 
   const [newTask, setNewTask] = useState('');
@@ -13,15 +22,18 @@ export default function TaskForm({tasks, setTasks}) {
     event.preventDefault()
     if (newTask.trim() === null || newTask.trim() === '') {
       alert('Please, enter a task');
+    } if (!newList) {
+      alert('Please, choose one of the options')
     } else {
     const task = {
       dueDate: onPushDate(newDate) || null,
       done: false,
       name: newTask.trim(),
       description: newDesc.trim() || null,
-      listId: newList ? newList : alert('Please, choose one of the options')
+      listId: newList
     }
-    postTask(task).then(tasks => setTasks(tasks.data))
+    postTask(task).then(setTasks(tasks.map(t => t.length ? {...tasks, ...task} : task)))
+    console.log(tasks);
   }
   setNewTask('');
   setNewDesc('');
@@ -29,14 +41,7 @@ export default function TaskForm({tasks, setTasks}) {
   setNewList('');
   }
 
-  function onPushDate(dueDate) {
-    if (dueDate) {
-        const day = new Date(dueDate).getDate();
-        const month = new Date(dueDate).getMonth();
-        const year = new Date(dueDate).getFullYear();
-        return new Date(year, month, day);
-    } else return null;
-}
+  
 // tasks.map(task => task)
 //console.log(tasks);
 
@@ -48,7 +53,7 @@ export default function TaskForm({tasks, setTasks}) {
                 onChange={(e) => setNewDate(e.target.value)}/></div>
                 <div><input name="name" type="text" placeholder="Add a new task" value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}/></div>
-                <div><input name="description" type="text" placeholder="Add a description" value={newDesc} 
+                <div><input name="description" type="text" placeholder="Add a description" value={newDesc}
                 onChange={(e) => setNewDesc(e.target.value)}/></div>
                 <div>
                   <select onChange={(e) => setNewList(e.target.value)}>
@@ -58,7 +63,7 @@ export default function TaskForm({tasks, setTasks}) {
                     <option value={3}>list3</option>
                   </select>
                 </div>
-                <input type="submit" value="Add"/>  
+                <input type="submit" value="Add"/>
             </form>
            
         </footer>

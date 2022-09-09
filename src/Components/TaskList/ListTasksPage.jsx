@@ -39,7 +39,7 @@ export default function ListTasksPage() {
                 </div>
                 {tasks.map(item => (<TaskItem key={item.id} item={item} {...taskItemProps} />))}
             </main>
-            <TaskForm />
+            <TaskForm tasks={tasks} setTasks={setTasks}/>
         </>
     )
 }
