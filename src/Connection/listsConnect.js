@@ -1,8 +1,11 @@
 import axios from 'axios';
+import { getTasksAction } from "../Store/taskReducer";
 
 export function getListTasks(id) {
-    return axios.get(`http://localhost:4000/lists/${id}/tasks?all=true`)
-        .then(res => res.data);
+    return function(dispatch) {
+        axios.get(`http://localhost:4000/lists/${id}/tasks?all=true`)
+        .then(res => dispatch(getTasksAction({tasks: res.data, id})))
+    }
 }
 
 export function getCollection() {

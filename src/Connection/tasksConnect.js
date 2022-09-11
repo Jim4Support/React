@@ -1,7 +1,9 @@
 import axios from "axios";
 
 export function getTasks() {
-    return axios.get("http://localhost:4000/tasks")
+    return function () {
+        axios.get("http://localhost:4000/tasks")
+    }
 }
 
 export function deleteTask(id) {
