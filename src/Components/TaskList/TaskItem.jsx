@@ -1,6 +1,7 @@
 import React from 'react';
 import './TaskItem.css';
 import { NavLink } from 'react-router-dom';
+import { deleteTask } from '../../Connection/tasksConnect';
 
 function overdue(dueDate) {
     const now = new Date();
@@ -19,7 +20,7 @@ function correctDate(dueDate) {
     } else return '~no date~';
 }
 
-export default function TaskItem({ item, onDelete, onUpdate }) {
+export default function TaskItem({ item, onUpdate, dispatch }) {
     return (
         <div>
             <hr className={(overdue(item.dueDate) && !item.done) ? 'background-red' : item.done ? 'background-green' : 'background-grey'} />
@@ -44,7 +45,7 @@ export default function TaskItem({ item, onDelete, onUpdate }) {
             </div>
             <div className='delete'>
                 {/* <button className='update' onClick={() => updateTask(item.id, item.name)}>change</button> */}
-                <button onClick={() => onDelete(item.id)}>delete</button>
+                <button onClick={() => dispatch(deleteTask(item.id))}>delete</button>
             </div>
         </div>
     )

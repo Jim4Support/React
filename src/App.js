@@ -1,4 +1,3 @@
-
 import React from "react";
 import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar.jsx'
@@ -20,8 +19,5 @@ function App() {
     </div>
   );
 }
-// TodayTasksPage - список задач на сьогодні, прострочені(перші) і не виконані(на сьогодні) 
-// + лейбл на ІД ліста з посиланням на поточний ліст
-// TodoListPage Створення лістів 
 
 export default App;

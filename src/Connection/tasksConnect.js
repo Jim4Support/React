@@ -1,4 +1,5 @@
 import axios from "axios";
+import { deleteTaskAction } from "../Store/taskReducer";
 
 export function getTasks() {
     return function () {
@@ -7,7 +8,10 @@ export function getTasks() {
 }
 
 export function deleteTask(id) {
-    return axios.delete("http://localhost:4000/tasks/" + id)
+    return function (dispatch) {
+    axios.delete(`http://localhost:4000/tasks/${id}`)
+    .then(res => dispatch(deleteTaskAction(...res.data)))
+    }
 }
 
 export function postTask(task) {
